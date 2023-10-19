@@ -14,8 +14,8 @@ class GameScene extends Phaser.Scene {
         this.onLadder = false;
         this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
         this.obstacles = []; // list of objects that collide with bullets used for later references
-          this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
-        // this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
+        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
+        this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
         // this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
         this.mobs = [];
     }
@@ -42,6 +42,10 @@ class GameScene extends Phaser.Scene {
         this.load.audio("shoot", "public/audio/shooting.mp3");
         this.load.audio("stageTheme", "public/audio/stageTheme.mp3");
 
+        this.load.image("muteButton", "/assets/menu/sound.png");
+        this.load.image("muteButtonHover", "/assets/menu/soundHover.png");
+        this.load.image("mutedButton", "/assets/menu/noSound.png");
+        this.load.image("mutedButtonHover", "/assets/menu/noSoundHover.png");
     }
 
     _displayText(text){
@@ -79,18 +83,28 @@ class GameScene extends Phaser.Scene {
         // FLOORS & CEILINGS
         for (let i = 0; i < tiles.x*3; i++) {    
             this._addObstacle("void", i, -1); // london ceiling
-            this._addObstacle("pavement", i, tiles.y*2-1); // sewers floor
+            this._addObstacle("pavement", i, tiles.y*2-3); // sewers floor
+            this._addObstacle("greyWall", i, tiles.y*2-2);
+            this._addObstacle("greyWall", i, tiles.y*2-1);
             if (i >= tiles.x+13 && i <= tiles.x+15) continue;
             this._addObstacle("pavement", i, tiles.y-1); // london floor
-            this._addObstacle("void", i, tiles.y); // sewers ceiling
+            this._addObstacle("void", i, tiles.y); // sewers ceiling top
+            this._addObstacle("void", i, tiles.y+6); // sewers ceiling bottom
         }
         // WALLS
         for (let i = 0; i < tiles.y*2; i++) {    
-            this._addObstacle("pavement", -1, i); // sewers floor
-            this._addObstacle("pavement", tiles.x*3, i);
+            this._addObstacle("pavement", -1, i); // left world wall
+            this._addObstacle("pavement", tiles.x*3, i); // right world wall
+            if (i > tiles.y && i < tiles.y+6) {
+                this._addObstacle("void", 44, i); // sewers ceiling left wall
+                this._addObstacle("void", 48, i); // sewers ceiling right wall
+            }
         }
 
         // London-1
+        for (let i = 0; i < tiles.x*1; i++) {
+            
+        }
         // London-2
         // London-3
         // Sewers-1
@@ -287,6 +301,31 @@ class GameScene extends Phaser.Scene {
         // );
 
     //------------------mobs
+
+    // 19:21
+    this.muteButton = this.add.image( 20, 20, "muteButton").setScale(2).setOrigin(0).setInteractive();
+        this.muteButton.on("pointerdown", ()=> {
+            this.sound.mute = !this.sound.mute
+            this.sound.add('buttonClick').play();
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButton");
+            }else{
+                this.muteButton.setTexture("muteButton");
+            }
+        }).on("pointerout", ()=> {
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButton");
+            }else{
+                this.muteButton.setTexture("muteButton");
+            }
+        }).on("pointerover", ()=> {
+            this.sound.add('buttonHover').play();
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButtonHover");
+            }else{
+                this.muteButton.setTexture("muteButtonHover");
+            }
+        })
     }
 
     update () {
