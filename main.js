@@ -1,8 +1,8 @@
 import './style.css'
 import Phaser from 'phaser';
 
-import { tiles, screenSize } from './public/assets/const';
-import Menu from './public/assets/Menu';
+import { screenSize, gravityPower } from './public/scripts/const';
+import Menu from './public/scripts/Menu';
 
 
 console.log(screenSize);
@@ -16,7 +16,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 },
+            gravity: { y: gravityPower },
             debugger: true
         }
     },

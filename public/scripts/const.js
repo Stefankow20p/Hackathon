@@ -9,4 +9,4 @@ export const screenSize = {
     height: tiles.size * 18 
 }
 
-const gravityPower = 2000
+export const gravityPower = 2000
