@@ -15,6 +15,7 @@ class GameScene extends Phaser.Scene {
         //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
         // this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
         this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
+        this.mobs = [];
     }
   
     preload () {
@@ -30,6 +31,8 @@ class GameScene extends Phaser.Scene {
         this.load.image("london_1", "/assets/londonBG.png");
         this.load.image("void", "assets/void.png");
         this.load.image("brick", "assets/brick.png");
+        this.load.image("ratR","/assets/mouseR.png");
+        this.load.image("ratL","/assets/mouseL.png");
     }
   
     _addObstacle (img, x = 0, y = 0) {
@@ -187,10 +190,92 @@ class GameScene extends Phaser.Scene {
                 hitBorder.destroy();
                 bullet.destroy();
             });
+
+            //kill mobs
+            this.physics.add.collider(bullet, this.mobs,  (bullet, mob) => {
+                hitBorder.destroy();
+                bullet.destroy();
+                mob.destroy();
+            });
         }
         this.input.keyboard.on('keydown-C', shoot);
-    }
+    
     //------------------shooting
+
+
+    //------------------mobs
+        const createMob = (
+            startX, startY,
+            mobTextureR, mobTextureL, 
+            mobVelocityX, mobVelocityY, 
+            mobColider1Exists = {exists: true, x: -2, y:0}, 
+            mobColider2Exists = {exists: true, x: 2, y:0}, 
+            currentlyFacing = 1
+            ) => {
+          const mob = this.physics.add.image(startX * tiles.size, startY * tiles.size, mobTextureR).setOrigin(0,0);
+          mob.setVelocity(mobVelocityX * currentlyFacing, mobVelocityY * currentlyFacing);
+
+          this.physics.add.collider(mob, this.obstacles);
+          let mobColider1;
+          let mobColider2;
+
+
+            mobColider1 = this.physics.add.image (
+                mob.x + (tiles.size) * mobColider1Exists.x,
+                mob.y + (tiles.size) * mobColider1Exists.y
+            ).setOrigin(0,0);
+            mobColider1.body.allowGravity = false;
+            mobColider1.visible = false;
+            mobColider1.setImmovable(true);
+
+
+            mobColider2 = this.physics.add.image (
+                mob.x + (tiles.size) * mobColider2Exists.x,
+                mob.y + (tiles.size) * mobColider2Exists.y
+            ).setOrigin(0,0);
+            mobColider2.body.allowGravity = false;
+            mobColider2.visible = false;
+            mobColider2.setImmovable(true);
+
+          // changes mob movement on collision
+          this.physics.add.collider(mob, [mobColider1, mobColider2], () => {
+              if(currentlyFacing == 1){
+                mob.setTexture(mobTextureL);
+                currentlyFacing = -1;
+              }else{
+                mob.setTexture(mobTextureR);
+                currentlyFacing = 1;
+              }
+              mob.setVelocity(mobVelocityX * currentlyFacing, mobVelocityY * currentlyFacing);
+          });
+
+          //kill player on collision
+          this.physics.add.collider(mob, this.player, () => {
+            this.player.body.x = this.checkpoint.x;
+            this.player.body.y = this.checkpoint.y;
+          });
+
+          this.mobs.push(mob);
+        };
+
+        createMob(
+            18,13, "ratR", "ratL", 100, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:2,y:0}
+        );
+        createMob(
+            23,13, "ratR", "ratL", 100, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:2,y:0}
+        );
+        createMob(
+            28,13, "ratR", "ratL", 100, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:2,y:0}
+        );
+
+    //------------------mobs
+    }
 
     update () {
         const {left, right, up, shift} = this.cursor;
