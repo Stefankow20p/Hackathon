@@ -20,7 +20,7 @@ class GameScene extends Phaser.Scene {
     }
   
     preload () {
-        this.load.image("brickSnow", "/assets/bloczekB.png");
+        // this.load.image("greyWall", "/assets/bloczekB.png");
         this.load.image("brickDefault", "/assets/bloczekA.png");
         this.load.image("pavement", "/assets/podloga.png");
         this.load.image("playerR", "/assets/playerR.png");
@@ -50,18 +50,18 @@ class GameScene extends Phaser.Scene {
     _loadMap () {
         // 1st *******************************
         for (let i = 0; i < tiles.x; i++) {
-            this._addObstacle("brickSnow", i, 0);
-            this._addObstacle("brickSnow", i, 17);
+            this._addObstacle("greyWall", i, 0);
+            this._addObstacle("greyWall", i, 17);
             // random
-            if (i < 10) this._addObstacle("brickSnow", i, 14);
-            if (i > 15) this._addObstacle("brickSnow", i, 14);
+            if (i < 10) this._addObstacle("greyWall", i, 14);
+            if (i > 15) this._addObstacle("greyWall", i, 14);
         }
         for (let i = 0; i < tiles.y; i++) {
-            this._addObstacle("brickSnow", 0, i);
+            this._addObstacle("greyWall", 0, i);
         }
         // stairs
         for (let i = 5; i < 15; i++) {
-            this._addObstacle("brickSnow", i, 16-i);
+            this._addObstacle("greyWall", i, 16-i);
         }
     
         // 2nd *******************************
