@@ -9,4 +9,13 @@ export const screenSize = {
     height: tiles.size * 18 
 }
 
-export const gravityPower = 2000
+// export const playerVelocity = 300;
+export const playerVelocity = 900;
+
+export const playerBulletSpeed = 1000;
+
+export const gravityPower = 2000;
+
+export const distancesForBulletTravel = {
+    playerBullet: 10
+};

@@ -6,7 +6,7 @@ import Menu from './public/scripts/Menu';
 import MenuCredits from './public/scripts/MenuCredits';
 import MenuOptions from './public/scripts/MenuOptions';
 import MenuStageSelect from './public/scripts/MenuStageSelect';
-
+import GameScene from './public/scripts/GameScene.js';
 
 const config = {
     type: Phaser.WEBGL,
@@ -21,6 +21,6 @@ const config = {
             debug: true
         }
     },
-    scene: [Menu, MenuCredits, MenuOptions, MenuStageSelect] 
+    scene: [Menu, MenuCredits, MenuOptions, GameScene]  
 };
 const game = new Phaser.Game(config);
