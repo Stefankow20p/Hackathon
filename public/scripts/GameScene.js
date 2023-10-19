@@ -5,36 +5,47 @@ import { playerVelocity, tiles, screenSize, gravityPower, distancesForBulletTrav
 
 class GameScene extends Phaser.Scene {
     constructor () {
-      super("scene-game");
-      this.cursor;
-      this.playerSpeed = playerVelocity;
-      this.player;
-      this.onLadder = false;
-      this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
-      this.obstacles = []; // list of objects that collide with bullets used for later references
-      this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
-      this.mobs = [];
+        super("scene-game");
+        this.cursor;
+        this.playerSpeed = playerVelocity;
+        this.player;
+        this.onLadder = false;
+        this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
+        this.obstacles = []; // list of objects that collide with bullets used for later references
+        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
+        // this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
+        this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
+        this.mobs = [];
     }
   
     preload () {
-      this.load.image("brickSnow", "/assets/bloczekB.png");
-      this.load.image("brickDefault", "/assets/bloczekA.png");
-      this.load.image("pavement", "/assets/podloga.png");
-      this.load.image("playerR", "/assets/playerR.png");
-      this.load.image("playerL", "/assets/playerL.png");
-      this.load.image("brickWall", "/assets/brick.png");
-      this.load.image("bullet","/assets/bullet.png");
-      this.load.image("ratR","/assets/mouseR.png");
-      this.load.image("ratL","/assets/mouseL.png");
+        this.load.image("brickSnow", "/assets/bloczekB.png");
+        this.load.image("brickDefault", "/assets/bloczekA.png");
+        this.load.image("pavement", "/assets/podloga.png");
+        this.load.image("playerR", "/assets/playerR.png");
+        this.load.image("playerL", "/assets/playerL.png");
+        this.load.image("greyWall", "/assets/sciana.png");
+        this.load.image("bullet","/assets/bullet.png");
+        this.load.image("sewers_2", "/assets/sewersBG.png");
+        this.load.image("sewers_1", "/assets/sewersBG2.png");
+        this.load.image("london_1", "/assets/londonBG.png");
+        this.load.image("void", "assets/void.png");
+        this.load.image("brick", "assets/brick.png");
+        this.load.image("ratR","/assets/mouseR.png");
+        this.load.image("ratL","/assets/mouseL.png");
     }
   
     _addObstacle (img, x = 0, y = 0) {
-      const brick = this.physics.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
-      brick.setImmovable(true);
-      brick.body.allowGravity = false;
-      this.physics.add.collider(this.player, brick); // YYY aktualnie tylko player
-      brick.setDisplaySize(tiles.size, tiles.size);
-      this.obstacles.push(brick);
+        const brick = this.physics.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
+        brick.setImmovable(true);
+        brick.body.allowGravity = false;
+        this.physics.add.collider(this.player, brick); // YYY aktualnie tylko player
+        brick.setDisplaySize(tiles.size, tiles.size);
+        this.obstacles.push(brick);
+    }
+    _loadBG (img, x = 0, y = 0) {
+        const bg = this.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
+        bg.setDisplaySize(tiles.size*tiles.x, tiles.size*tiles.y);
     }
     // ========================================== MICHAŁ ============================
     _loadMap () {
@@ -59,9 +70,8 @@ class GameScene extends Phaser.Scene {
         for (let i = tiles.x*level2.x; i < tiles.x*2; i++) {
             // ceiling & floor
             this._addObstacle("brickDefault", i, 0);
-            if (i < tiles.x*level2.x+10 || i > tiles.x*level2.x+15) {
-            this._addObstacle("brickDefault", i, tiles.y-1); // floor
-            this._addObstacle("brickWall", i, tiles.y); // other screen ceiling
+            if (i < tiles.x*level2.x+13 || i > tiles.x*level2.x+15) {
+                this._addObstacle("brickDefault", i, tiles.y-1); // floor
             }
         }
     
@@ -75,22 +85,35 @@ class GameScene extends Phaser.Scene {
             this._addObstacle("pavement", tiles.x*3-1, i);
         }
     
-        // 4th *******************************
-        const level4 = {x: 1, y: 1};
-        for (let i = 32; i < 64; i++) {
-            this._addObstacle("pavement", i, tiles.y*2 - 1);
+        // 4th (SEWERS) *******************************
+        for (let i = tiles.y+7; i < tiles.y*2-3; i++) {
+            this._addObstacle("brick", 0, i);
+            this._addObstacle("brick", 0, i);
+            this._addObstacle("brick", tiles.x*3-1, i);
         }
-        for (let i = tiles.y; i < tiles.y*2; i++) {
-            this._addObstacle("brickWall", tiles.x, i);
-            this._addObstacle("brickWall", tiles.x*2-1, i);
+        for (let i = 0; i < tiles.x*3; i++) {
+            this._addObstacle("pavement", i, tiles.y*2 - 3);
+            this._addObstacle("greyWall", i, tiles.y*2 - 2);
+            this._addObstacle("greyWall", i, tiles.y*2 - 1);
+
+            if (i < tiles.x*level2.x+13 || i > tiles.x*level2.x+15) {
+                this._addObstacle("brickDefault", i, tiles.y-1); // floor
+                this._addObstacle("void", i, tiles.y+6);
+            }
         }
+        for (let i = 0; i < 6; i++) {
+            this._addObstacle("void", tiles.x+12, tiles.y+i);
+            this._addObstacle("void", tiles.x+16, tiles.y+i);
+        }
+
+        // 5th (SEWERS)
     }
     // ========================================== MICHAŁ / ============================
 
 
     // ========================================== MAREK (Laddery) ============================
     // _addLadder() {
-    //   this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
+    //   this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "greyWall").setOrigin(0, 0);
     //   this.ladder.setImmovable(true);
     //   this.ladder.body.allowGravity = false;
     //   this.ladder.setDisplaySize(tiles.size, tiles.size);
@@ -106,8 +129,8 @@ class GameScene extends Phaser.Scene {
   
     create () {
         // this.ladder = this.physics.add.group([
-        //     { key: 'brickWall', frame: 0, repeat: 10, setXY: { x: tiles.size*3, y: tiles.size*2, stepY: tiles.size} },
-        //     { key: 'brickWall', frame: 0, repeat: 10, setXY: { x: tiles.size*6, y: tiles.size*2, stepY: tiles.size} }
+        //     { key: 'greyWall', frame: 0, repeat: 10, setXY: { x: tiles.size*3, y: tiles.size*2, stepY: tiles.size} },
+        //     { key: 'greyWall', frame: 0, repeat: 10, setXY: { x: tiles.size*6, y: tiles.size*2, stepY: tiles.size} }
         // ]);
         // this.ladder.children.iterate((child) => {
         //     child.setImmovable(true);
@@ -115,7 +138,12 @@ class GameScene extends Phaser.Scene {
         //     child.setDisplaySize(tiles.size, tiles.size).setOrigin(0, 0)
         // });
     
-        // creates a player
+        this._loadBG("london_1", 0, 0);
+        this._loadBG("london_1", tiles.x, 0);
+        this._loadBG("london_1", tiles.x*2, 0);
+        this._loadBG("sewers_2", tiles.x, tiles.y);
+        this._loadBG("sewers_1", 0, tiles.y);
+        this._loadBG("sewers_1", tiles.x*2, tiles.y);
         this.player = this.physics.add.image(this.checkpoint.x, this.checkpoint.y, "playerR").setOrigin(0, 0);
         
         this.player.body.onOverlap = true;
