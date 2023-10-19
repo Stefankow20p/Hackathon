@@ -22,6 +22,10 @@ class Menu extends Phaser.Scene{
         this.load.image("optionsButtonHover", "/assets/menu/ctrlsButtonHover.png");
         this.load.image("creditsButton", "/assets/menu/creditsButton.png");
         this.load.image("creditsButtonHover", "/assets/menu/creditsButtonHover.png");
+        this.load.image("muteButton", "/assets/menu/sound.png");
+        this.load.image("muteButtonHover", "/assets/menu/soundHover.png");
+        this.load.image("mutedButton", "/assets/menu/noSound.png");
+        this.load.image("mutedButtonHover", "/assets/menu/noSoundHover.png");
         this.load.image("bg", "/assets/londonBG.png");
         
 
@@ -33,8 +37,10 @@ class Menu extends Phaser.Scene{
 
     create(){
         const buttonShiftY = 20;
-
         const screenMiddle =  screenSize.width / 2;
+
+        this.title = this.add.text(screenMiddle, 20, "A rubber room", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
+
         this.buttonLevels = this.add.image( screenMiddle, (screenSize.height/4 + buttonShiftY) , "levelsButton").setScale(3).setInteractive();
         this.buttonLevels.on("pointerdown", ()=> {
             if(this.switchableScene){
@@ -75,7 +81,34 @@ class Menu extends Phaser.Scene{
             this.sound.add('buttonHover').play();
         })
 
+
+        this.muteButton = this.add.image( 20, 20 , "muteButton").setScale(2).setOrigin(0).setInteractive();
+        this.muteButton.on("pointerdown", ()=> {
+            this.sound.mute = !this.sound.mute
+            this.sound.add('buttonClick').play();
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButton");
+            }else{
+                this.muteButton.setTexture("muteButton");
+            }
+        }).on("pointerout", ()=> {
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButton");
+            }else{
+                this.muteButton.setTexture("muteButton");
+            }
+        }).on("pointerover", ()=> {
+            this.sound.add('buttonHover').play();
+            if(this.sound.mute){
+                this.muteButton.setTexture("mutedButtonHover");
+            }else{
+                this.muteButton.setTexture("muteButtonHover");
+            }
+        })
+
+
         this.title = this.add.text(screenMiddle, 20, "London 1666", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
+
 
         if(this.firstOpen){
             this.title.setAlpha(0);
