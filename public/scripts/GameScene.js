@@ -35,98 +35,96 @@ class GameScene extends Phaser.Scene {
       this.objectsThatCollideBullets.push(brick);
     }
     _genLevel () {
-      // 1st *******************************
-      for (let i = 0; i < tiles.x; i++) {
-        this._addObject("brickSnow", i, 0);
-        this._addObject("brickSnow", i, 17);
-        // random
-        if (i < 10) this._addObject("brickSnow", i, 14);
-        if (i > 15) this._addObject("brickSnow", i, 14);
-      }
-      for (let i = 0; i < tiles.y; i++) {
-        this._addObject("brickSnow", 0, i);
-      }
-      // stairs
-      for (let i = 5; i < 15; i++) {
-        this._addObject("brickSnow", i, 16-i);
-      }
-  
-      // 2nd *******************************
-      const level2 = {x: 1, y: 0};
-      for (let i = tiles.x*level2.x; i < tiles.x*2; i++) {
-        // ceiling & floor
-        this._addObject("brickDefault", i, 0);
-        if (i < tiles.x*level2.x+10 || i > tiles.x*level2.x+15) {
-          this._addObject("brickDefault", i, tiles.y-1);
-          this._addObject("brickWall", i, tiles.y);
+        // 1st *******************************
+        for (let i = 0; i < tiles.x; i++) {
+            this._addObject("brickSnow", i, 0);
+            this._addObject("brickSnow", i, 17);
+            // random
+            if (i < 10) this._addObject("brickSnow", i, 14);
+            if (i > 15) this._addObject("brickSnow", i, 14);
         }
-      }
-  
-      // 3rd *******************************
-      const level3 = {x: 2, y: 0};
-      for (let i = tiles.x*level3.x; i < tiles.x+tiles.x*level3.x; i++) {
-        this._addObject("pavement", i, 0);
-        this._addObject("pavement", i, 17);
-      }
-      for (let i = 0; i < tiles.y; i++) {
-        this._addObject("pavement", tiles.x*3-1, i);
-      }
-  
-      // 4th *******************************
-      const level4 = {x: 1, y: 1};
-      // for (let i = tiles.x*level3.x; i < tiles.x+tiles.x*level3.x; i++) {
-      //   this._addObject("pavement", i, tiles.y);
-      //   this._addObject("pavement", i, tiles.y*2 - 1);
-      // }
-      for (let i = 32; i < 64; i++) {
-        this._addObject("pavement", i, tiles.y*2 - 1);
-      }
-      for (let i = tiles.y; i < tiles.y*2; i++) {
-        this._addObject("brickWall", tiles.x, i);
-        this._addObject("brickWall", tiles.x*2-1, i);
-      }
+        for (let i = 0; i < tiles.y; i++) {
+            this._addObject("brickSnow", 0, i);
+        }
+        // stairs
+        for (let i = 5; i < 15; i++) {
+            this._addObject("brickSnow", i, 16-i);
+        }
+    
+        // 2nd *******************************
+        const level2 = {x: 1, y: 0};
+        for (let i = tiles.x*level2.x; i < tiles.x*2; i++) {
+            // ceiling & floor
+            this._addObject("brickDefault", i, 0);
+            if (i < tiles.x*level2.x+10 || i > tiles.x*level2.x+15) {
+            this._addObject("brickDefault", i, tiles.y-1); // floor
+            this._addObject("brickWall", i, tiles.y); // other screen ceiling
+            }
+        }
+    
+        // 3rd *******************************
+        const level3 = {x: 2, y: 0};
+        for (let i = tiles.x*level3.x; i < tiles.x+tiles.x*level3.x; i++) {
+            this._addObject("pavement", i, 0);
+            this._addObject("pavement", i, 17);
+        }
+        for (let i = 0; i < tiles.y; i++) {
+            this._addObject("pavement", tiles.x*3-1, i);
+        }
+    
+        // 4th *******************************
+        const level4 = {x: 1, y: 1};
+        for (let i = 32; i < 64; i++) {
+            this._addObject("pavement", i, tiles.y*2 - 1);
+        }
+        for (let i = tiles.y; i < tiles.y*2; i++) {
+            this._addObject("brickWall", tiles.x, i);
+            this._addObject("brickWall", tiles.x*2-1, i);
+        }
     }
-    _addLadder() {
-      this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
-      this.ladder.setImmovable(true);
-      this.ladder.body.allowGravity = false;
-      this.ladder.setDisplaySize(tiles.size, tiles.size);
+    // _addLadder() {
+    //   this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
+    //   this.ladder.setImmovable(true);
+    //   this.ladder.body.allowGravity = false;
+    //   this.ladder.setDisplaySize(tiles.size, tiles.size);
       
-        // this.physics.add.overlap(this.player, this.ladder);    
+    //     // this.physics.add.overlap(this.player, this.ladder);    
+    //     // this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
+    //     //     if (gameObject1 == this.player && gameObject2 == this.ladder) {
+    //     //         this.onLadder = true;
+    //     //         console.log("LADDER")
+    //     //     } else this.onLadder = false;
+    //     // });
+    // }
+  
+    create () {
+        // this.ladder = this.physics.add.group([
+        //     { key: 'brickWall', frame: 0, repeat: 10, setXY: { x: tiles.size*3, y: tiles.size*2, stepY: tiles.size} },
+        //     { key: 'brickWall', frame: 0, repeat: 10, setXY: { x: tiles.size*6, y: tiles.size*2, stepY: tiles.size} }
+        // ]);
+        // this.ladder.children.iterate((child) => {
+        //     child.setImmovable(true);
+        //     child.body.allowGravity = false;
+        //     child.setDisplaySize(tiles.size, tiles.size).setOrigin(0, 0)
+        // });
+    
+        this.player = this.physics.add.image(tiles.size, tiles.size*(tiles.y/2), "playerR").setOrigin(0, 0);
+        this.player.body.onOverlap = true;
+        this.physics.add.overlap(this.player, this.ladder);
+
         // this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
         //     if (gameObject1 == this.player && gameObject2 == this.ladder) {
         //         this.onLadder = true;
         //         console.log("LADDER")
         //     } else this.onLadder = false;
         // });
-    }
-  
-    create () {
-      // this.player.setCollideWorldBounds(true);
-    //   this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
-    //   this.ladder.setImmovable(true);
-    //   this.ladder.body.allowGravity = false;
-    //   this.ladder.setDisplaySize(tiles.size, tiles.size);
-    this._addLadder();
-  
-      this.player = this.physics.add.image(tiles.size, tiles.size*(tiles.y/2), "playerR").setOrigin(0, 0);
 
-    //   --
-    this.player.body.onOverlap = true;
-    this.physics.add.overlap(this.player, this.ladder);    
-    this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
-        if (gameObject1 == this.player && gameObject2 == this.ladder) {
-            this.onLadder = true;
-            console.log("LADDER")
-        } else this.onLadder = false;
-    });
-    // --
+        this._genLevel();
+        this.cursor = this.input.keyboard.createCursorKeys();
+        this.cameras.main.startFollow(this.player, false, 0.2, 0.2);
+        this.cameras.main.setBounds(0, 0, screenSize.width*3, screenSize.height);
+        // this.cameras.main.scrollY = 100;
 
-      this._genLevel();
-      this.cursor = this.input.keyboard.createCursorKeys();
-      this.cameras.main.startFollow(this.player, false, 0.2, 0.2);
-      this.cameras.main.setBounds(0, 0, screenSize.width*3, screenSize.height);
-      // this.cameras.main.scrollY = 100;
 
       //------------------shooting
       const shoot = () =>{
@@ -154,7 +152,7 @@ class GameScene extends Phaser.Scene {
         });
         
       }
-      this.input.keyboard.on('keyup-SPACE', shoot);
+      this.input.keyboard.on('keyup-C', shoot);
       this.input.keyboard.on('keydown-LEFT', () => {
         this.playerFacing = -1;
       });
@@ -162,36 +160,40 @@ class GameScene extends Phaser.Scene {
         this.playerFacing = 1;
       });
       //------------------shooting
+
     }
   
     update () {
-      const {left, right, up, space} = this.cursor;
+      const {left, right, up, shift} = this.cursor;
 
     //   console.log(Phaser.Physics.Matter.MatterPhysics)
-  
-      if (left.isDown) {
+
+    if (left.isDown) {
         this.player.setVelocityX(-this.playerSpeed);
         this.player.setTexture("playerL");
-      } else if (right.isDown) {
+    } else if (right.isDown) {
         this.player.setVelocityX(this.playerSpeed);
         this.player.setTexture("playerR");
-      } else {
+    } else {
         this.player.setVelocityX(0);
-      }
+    }
 
-      // if (space.isDown) this.onLadder = true;
-      // else this.onLadder = false;
-  
-      if (up.isDown) {
+    if (shift.isDown) this.onLadder = true;
+    else this.onLadder = false;
+
+    if (up.isDown) {
+
         if (this.onLadder) {
             this.player.setVelocityY(-this.playerSpeed)/6;
         } else if (this.player.body.touching.down) {
             this.player.setVelocityY(-gravityPower+gravityPower/1.7);
         }
-      }
-  
-      if (this.player.y > screenSize.height) this.cameras.main.setBounds(0, screenSize.height, screenSize.width*3, screenSize.height);
     }
-  }
+      
+    //   change camera location
+      if (this.player.y > screenSize.height) this.cameras.main.setBounds(0, screenSize.height, screenSize.width*3, screenSize.height);
+      else this.cameras.main.setBounds(0, 0, screenSize.width*3, screenSize.height);
+    }
+}
 
 export default GameScene;
