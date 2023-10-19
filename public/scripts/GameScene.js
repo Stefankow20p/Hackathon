@@ -70,6 +70,9 @@ class GameScene extends Phaser.Scene {
         this._addObject("pavement", i, 0);
         this._addObject("pavement", i, 17);
       }
+      for (let i = 0; i < tiles.y; i++) {
+        this._addObject("pavement", 32*3-1, i);
+      }
   
       // 4th
       const level4 = {x: 1, y: 1};
