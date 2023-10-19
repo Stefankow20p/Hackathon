@@ -15,12 +15,14 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image("levelsButton", "/assets/menu/levelsButton.png");
-        this.load.image("levelsButtonHover", "/assets/menu/levelsButtonHover.png");
-        this.load.image("optionsButton", "/assets/menu/optionsButton.png");
-        this.load.image("optionsButtonHover", "/assets/menu/optionsButtonHover.png");
+        this.load.image("levelsButton", "/assets/menu/playButton.png");
+        this.load.image("levelsButtonHover", "/assets/menu/playButtonHover.png");
+        this.load.image("optionsButton", "/assets/menu/ctrlsButton.png");
+        this.load.image("optionsButtonHover", "/assets/menu/ctrlsButtonHover.png");
         this.load.image("creditsButton", "/assets/menu/creditsButton.png");
         this.load.image("creditsButtonHover", "/assets/menu/creditsButtonHover.png");
+        this.load.image("bg", "/assets/londonBG.png");
+        
 
         this.load.audio("buttonHover", "public/audio/menu/menuHover.mp3");
         this.load.audio("buttonClick", "public/audio/menu/menuClick.mp3");
@@ -66,7 +68,7 @@ class Menu extends Phaser.Scene{
 
         })
 
-        this.title = this.add.text(screenMiddle, 20, "Through the History", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
+        this.title = this.add.text(screenMiddle, 20, "A rubber room", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
 
         if(this.firstOpen){
             this.title.setAlpha(0);
@@ -74,6 +76,9 @@ class Menu extends Phaser.Scene{
             this.buttonOptions.setAlpha(0);
             this.buttonCredits.setAlpha(0);
             this.infoText = this.add.text(screenMiddle, screenSize.height/2, "Click anywhere\nto continue", {align: "center", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
+        }else{
+            this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
+            
         }
 
         this.input.on("pointerdown", () =>{
@@ -94,16 +99,16 @@ class Menu extends Phaser.Scene{
 
     fadeIn(){
         this.alpha += 0.04;
-        console.log(this.alpha);
         this.buttonLevels.setAlpha(this.alpha);
         this.buttonOptions.setAlpha(this.alpha);
         this.buttonCredits.setAlpha(this.alpha);
-        console.log(this.alpha);
 
         if(this.alpha < 1){
             this.timedEvent = this.time.delayedCall(100, this.fadeIn, [], this);
         }else{
             this.title.setAlpha(1);
+        this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
+            
         }
     }
 
