@@ -41,6 +41,7 @@ class GameScene extends Phaser.Scene {
 
         this.load.audio("shoot", "public/audio/shooting.mp3");
         this.load.audio("stageTheme", "public/audio/stageTheme.mp3");
+        this.load.audio("playerDeath", "public/audio/playerDeath.mp3");
 
         this.load.image("muteButton", "/assets/menu/sound.png");
         this.load.image("muteButtonHover", "/assets/menu/soundHover.png");
@@ -321,7 +322,8 @@ class GameScene extends Phaser.Scene {
           this.physics.add.collider(mob, this.player, () => {
             this.player.body.x = this.checkpoint.x;
             this.player.body.y = this.checkpoint.y;
-            
+            this.sound.add('playerDeath').play();
+
           });
 
           this.mobs.push(mob);
