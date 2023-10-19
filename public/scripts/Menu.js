@@ -81,6 +81,7 @@ class Menu extends Phaser.Scene{
             this.sound.add('buttonHover').play();
         })
 
+
         this.muteButton = this.add.image( 20, 20 , "muteButton").setScale(2).setOrigin(0).setInteractive();
         this.muteButton.on("pointerdown", ()=> {
             this.sound.mute = !this.sound.mute
@@ -105,6 +106,8 @@ class Menu extends Phaser.Scene{
             }
         })
 
+
+        this.title = this.add.text(screenMiddle, 20, "London 1666", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
 
 
         if(this.firstOpen){

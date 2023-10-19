@@ -1,8 +1,8 @@
 # Tytuł
-"A rubber room"
+"London 1666"
 
 ## Tematyka
-Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666
+Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w Londynie latach 1665 - 1666.
 
 ## Kontrolki
 - Skok, lewo, prawo:    strzałki
@@ -11,10 +11,16 @@ Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 166
 - Pomijanie tekstu:     spacja
 
 ## Twórcy:
-- Michał Cichocki 4P (Kod)
-- Błażej Łuczak 4P (Sprite'y)
+- Michał Cichocki 4P (Kod, Muzyka)
+- Błażej Łuczak 4P (Grafika)
 - Piotr Stefanków 4P (Kod)
-- Marek Trzeciak 4P (Kod)
+- Marek Trzeciak 4P (Kod, Muzyka)
 
 ## Cel gry:
-Gra nieukończona. Demo. (można zabijać szczury tho xDDD)
+Zabicie wszystkich szczurów i nietoperzy w Londynie.
+
+## Inne informacje:
+- wszytkie grafiki zrobione są przez nas (znaczy Błażeja)
+- wszystkie efekty dźwiękowe oraz muzyka również została zrobiona przez nas (poza dźwiękiem wystrzału, który został wycięty z tego filmu: https://www.youtube.com/watch?v=KdZjNg71UpU&t=65s)
+- tematyka początkowo miała być trochę inna, ale nie wyrobiliśmy się, więc skleiliśmy coś z tego co zrobiliśmy
+- nie przewidywaliśmy latania jako mechaniki, ale nie zdążyliśmy zrobić drabin (przez co jest to jedyny sposób na wydostanie się z podziemi)
