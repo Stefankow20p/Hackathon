@@ -14,8 +14,8 @@ class GameScene extends Phaser.Scene {
         this.onLadder = false;
         this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
         this.obstacles = []; // list of objects that collide with bullets used for later references
-        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // start
-        this.checkpoint = {x: tiles.size*50, y: tiles.size*28}; // sewers
+          this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // start
+        // this.checkpoint = {x: tiles.size*50, y: tiles.size*28}; // sewers
         // this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
         this.mobs = [];
     }
@@ -326,34 +326,122 @@ class GameScene extends Phaser.Scene {
           this.mobs.push(mob);
         };
 
-        // createMob(
-        //     18,13, "ratR", "ratL", 100, 0,
-        //     {exists:true, x:-2,y:0},
-        //     {exists:true, x:2,y:0}
-        // );
-        // createMob(
-        //     23,13, "ratR", "ratL", 100, 0,
-        //     {exists:true, x:-2,y:0},
-        //     {exists:true, x:2,y:0}
-        // );
-        // createMob(
-        //     28,13, "ratR", "ratL", 100, 0,
-        //     {exists:true, x:-2,y:0},
-        //     {exists:true, x:2,y:0}
-        // );
+        //mobs in severs
+        createMob(
+            18,23, "bat", "bat", 100, 0,
+            {exists:true, x:-5,y:0},
+            {exists:true, x:10,y:0}
+        );
+        createMob(
+            10,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            13,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            45,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            80,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:6,y:0}
+        );
+        createMob(
+            90,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            90,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-30,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            16,26, "ratR", "ratL", 100, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:2,y:0}
+        );
+        createMob(
+            28,27, "ratR", "ratL", 100, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:1.9,y:0}
+        );
+        createMob(
+            11,29, "ratR", "ratL", 100, 0,
+            {exists:true, x:-6,y:0},
+            {exists:true, x:2,y:0}
+        );
+        createMob(
+            12,29, "ratR", "ratL", 100, 0,
+            {exists:true, x:-3,y:0},
+            {exists:true, x:1,y:0}
+        );
+        createMob(
+            42,29, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:3,y:0}
+        );
+        createMob(
+            74,29, "ratR", "ratL", 100, 0,
+            {exists:true, x:-5,y:0},
+            {exists:true, x:3,y:0}
+        );
+        createMob(
+            74,29, "ratR", "ratL", 100, 0,
+            {exists:true, x:-1,y:0},
+            {exists:true, x:2,y:0}
+        );
+        createMob(
+            71,27, "bat", "bat", 200, 0,
+            {exists:true, x:-3,y:0},
+            {exists:true, x:4,y:0}, 
+            1, false
+        );
+        createMob(
+            40,27, "bat", "bat", 300, 0,
+            {exists:true, x:-1,y:0},
+            {exists:true, x:5,y:0}, 
+            1, false
+        );
+        createMob(
+            25,31, "bat", "bat", 200, 0,
+            {exists:true, x:-1,y:0},
+            {exists:true, x:5,y:0}, 
+            1, false
+        );
+        createMob(
+            40,27, "bat", "bat", 0, 200,
+            {exists:true, x:0,y:-2.8},
+            {exists:true, x:0,y:2.9}, 1, false
+        );
+        createMob(
+            24,26, "bat", "bat", 0, 200,
+            {exists:true, x:0,y:-1.8},
+            {exists:true, x:0,y:0.9}, 1, false
+        );
+        createMob(
+            63,27, "bat", "bat", 0, 300,
+            {exists:true, x:0,y:-2.8},
+            {exists:true, x:0,y:2.9}, 1, false
+        );
+        createMob(
+            85,27, "bat", "bat", 0, 300,
+            {exists:true, x:0,y:-2.8},
+            {exists:true, x:0,y:4.9}, 1, false
+        );
+        //--------------mobs in sewers
 
-        // createMob(
-        //     50,32, "ratR", "ratL", 100, 0,
-        //     {exists:true, x:-8,y:0},
-        //     {exists:true, x:8,y:0}
-        // );
+        //--------------mobs on the surface
 
-        // createMob(
-        //     40,27, "bat", "bat", 0, 100,
-        //     {exists:true, x:0,y:-2},
-        //     {exists:true, x:0,y:2}, 1, false
-        // );
 
+        
+        //--------------mobs on the surface
     //------------------mobs
 
     // 19:21
