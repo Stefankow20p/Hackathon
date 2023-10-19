@@ -14,7 +14,8 @@ class Menu extends Phaser.Scene{
         this.load.image("arrowButton", "/assets/menu/arrowButton.png");
         this.load.image("arrowButtonHover", "/assets/menu/arrowButtonHover.png");
 
-
+        this.load.audio("buttonHover", "public/audio/menu/menuHover.mp3");
+        this.load.audio("buttonClick", "public/audio/menu/menuClick.mp3");
 
     }
 
@@ -23,11 +24,13 @@ class Menu extends Phaser.Scene{
 
         this.backButton = this.add.image( 20, 20 , "arrowButton").setScale(2).setOrigin(0).setInteractive();
         this.backButton.on("pointerdown", ()=> {
-            this.scene.start("menu");      
+            this.scene.start("menu");
+            this.sound.add('buttonClick').play();
         }).on("pointerout", ()=> {
             this.backButton.setTexture("arrowButton");
         }).on("pointerover", ()=> {
             this.backButton.setTexture("arrowButtonHover");
+            this.sound.add('buttonHover').play();
         })
 
         this.add.text(screenMiddle, 20, "CREDITS", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
