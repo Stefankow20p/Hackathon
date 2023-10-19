@@ -12,6 +12,7 @@ class Menu extends Phaser.Scene{
         this.buttonCredits
         this.alpha = 0
         this.firstOpen = true
+        this.switchableScene = false
     }
 
     preload(){
@@ -27,17 +28,20 @@ class Menu extends Phaser.Scene{
         this.load.audio("buttonHover", "public/audio/menu/menuHover.mp3");
         this.load.audio("buttonClick", "public/audio/menu/menuClick.mp3");
         this.load.audio("intro", "public/audio/menu/load.mp3");
+        this.load.audio("menuTheme", "public/audio/menu/menuTheme.mp3");
     }
 
     create(){
-        this.sound.pauseOnBlur = true;
         const buttonShiftY = 20;
 
         const screenMiddle =  screenSize.width / 2;
         this.buttonLevels = this.add.image( screenMiddle, (screenSize.height/4 + buttonShiftY) , "levelsButton").setScale(3).setInteractive();
         this.buttonLevels.on("pointerdown", ()=> {
-            this.sound.add('buttonClick').play();
-            this.scene.start("scene-game");
+            if(this.switchableScene){
+                this.sound.add('buttonClick').play();
+                this.scene.start("scene-game");
+                this.theme.stop();
+            }
         }).on("pointerout", ()=> {
             this.buttonLevels.setTexture("levelsButton");
         }).on("pointerover", ()=> {
@@ -47,8 +51,10 @@ class Menu extends Phaser.Scene{
 
         this.buttonOptions = this.add.image(screenMiddle , (screenSize.height/2 + buttonShiftY) , "optionsButton").setScale(3).setInteractive();
         this.buttonOptions.on("pointerdown", ()=> {
-            this.sound.add('buttonClick').play();
-            this.scene.start("menuOptions");    
+            if(this.switchableScene){
+                this.sound.add('buttonClick').play();
+                this.scene.start("menuOptions");
+            }           
         }).on("pointerout", ()=> {
             this.buttonOptions.setTexture("optionsButton");
         }).on("pointerover", ()=> {
@@ -58,14 +64,15 @@ class Menu extends Phaser.Scene{
 
         this.buttonCredits = this.add.image(screenMiddle , (screenSize.height*3/4 + buttonShiftY), "creditsButton").setScale(3).setInteractive();
         this.buttonCredits.on("pointerdown", ()=> {
-            this.sound.add('buttonClick').play();
-            this.scene.start("menuCredits");   
+            if(this.switchableScene){
+                this.sound.add('buttonClick').play();
+                this.scene.start("menuCredits");
+            }
         }).on("pointerout", ()=> {
             this.buttonCredits.setTexture("creditsButton");
         }).on("pointerover", ()=> {
             this.buttonCredits.setTexture("creditsButtonHover");
             this.sound.add('buttonHover').play();
-
         })
 
         this.title = this.add.text(screenMiddle, 20, "A rubber room", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
@@ -78,7 +85,6 @@ class Menu extends Phaser.Scene{
             this.infoText = this.add.text(screenMiddle, screenSize.height/2, "Click anywhere\nto continue", {align: "center", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
         }else{
             this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
-            
         }
 
         this.input.on("pointerdown", () =>{
@@ -88,9 +94,7 @@ class Menu extends Phaser.Scene{
                 this.timedEvent = this.time.delayedCall(100, this.fadeIn, [], this);
                 this.firstOpen = false;
             }
-
         })
-
     }
 
     update(){
@@ -107,8 +111,14 @@ class Menu extends Phaser.Scene{
             this.timedEvent = this.time.delayedCall(100, this.fadeIn, [], this);
         }else{
             this.title.setAlpha(1);
-        this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
-            
+            this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
+            this.timedEvent = this.time.delayedCall(1000, ()=>{
+                this.theme = this.sound.add('menuTheme');
+                // this.theme.on('loop', this.theme.play);
+                this.theme.loop = (true);
+                this.theme.play();
+            }, [], this);
+            this.switchableScene = true;
         }
     }
 
