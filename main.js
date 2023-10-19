@@ -3,10 +3,7 @@ import Phaser from 'phaser';
 
 import { screenSize, gravityPower } from './public/scripts/const';
 import Menu from './public/scripts/Menu';
-
-// hello
-// branch
-console.log(screenSize);
+import GameScene from './public/scripts/GameScene.js';
 
 const config = {
     type: Phaser.WEBGL,
@@ -21,6 +18,6 @@ const config = {
             debugger: true
         }
     },
-    scene: [Menu] 
+    scene: [GameScene] 
 };
 const game = new Phaser.Game(config);
