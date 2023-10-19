@@ -31,7 +31,7 @@ class GameScene extends Phaser.Scene {
       brick.body.allowGravity = false;
       this.physics.add.collider(this.player, brick); // YYY aktualnie tylko player
       brick.setDisplaySize(tiles.size, tiles.size);
-      this.obstacles.push(brick);ł
+      this.obstacles.push(brick);
     }
     // ========================================== MICHAŁ ============================
     _loadMap () {
