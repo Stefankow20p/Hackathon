@@ -35,7 +35,28 @@ class GameScene extends Phaser.Scene {
         this.load.image("brick", "assets/brick.png");
         this.load.image("ratR","/assets/mouseR.png");
         this.load.image("ratL","/assets/mouseL.png");
+
+        this.load.audio("shoot", "public/audio/shooting.mp3");
+
     }
+
+    _displayText(text){
+        this.reading = true;
+
+        this.dialogueText = this.add.text(screenSize.width/2, screenSize.height*2/5-20, text, {align: "center", color:"#000", fontFamily: "arcade", fontSize: 32, fixedWidth:600, maxLines: 5, wordWrap: { width: 600, useAdvancedWrap: true }}).setOrigin(0.5,0).setDepth(3);
+        this.dialgueBox = this.add.image(screenSize.width/2, screenSize.height/2, "dialogue").setOrigin(0.5,0.5).setScale(3).setDepth(2);
+        this.dialgueBox.visible = true;
+        this.dialogueText.visible = true;
+
+        this.input.keyboard.on("keydown-SPACE", () =>{
+            if(this.reading){
+                this.reading = false;
+                this.dialgueBox.visible = false;
+                this.dialogueText.visible = false;
+            }
+        })
+    }
+  
   
     _addObstacle (img, x = 0, y = 0) {
         const brick = this.physics.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
@@ -169,6 +190,7 @@ class GameScene extends Phaser.Scene {
 
         //------------------shooting
         const shoot = () => {
+            this.sound.add('shoot').play();
             let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
             bullet.body.allowGravity = false;
             bullet.setVelocity(playerBulletSpeed * this.playerFacing, 0);
