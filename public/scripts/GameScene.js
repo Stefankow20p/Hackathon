@@ -14,8 +14,8 @@ class GameScene extends Phaser.Scene {
         this.onLadder = false;
         this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
         this.obstacles = []; // list of objects that collide with bullets used for later references
-        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
-        this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
+        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // start
+        this.checkpoint = {x: tiles.size*50, y: tiles.size*28}; // sewers
         // this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
         this.mobs = [];
     }
@@ -102,14 +102,68 @@ class GameScene extends Phaser.Scene {
         }
 
         // London-1
-        for (let i = 0; i < tiles.x*1; i++) {
-            
+        let L = 0;
+        for (let i = 0+L*tiles.x; i < tiles.x*1+L*tiles.x; i++) {
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 14);
+            if (i>L*tiles.x+20 && i<L*tiles.x+30) this._addObstacle("brick", i, 11);
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 8);
+            if (i>L*tiles.x+0 && i<L*tiles.x+10) this._addObstacle("brick", i, 5);
         }
         // London-2
+        L = 1;
+        for (let i = 0+L*tiles.x; i < tiles.x*1+L*tiles.x; i++) {
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 14);
+            if (i>L*tiles.x+20 && i<L*tiles.x+30) this._addObstacle("brick", i, 11);
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 8);
+            if (i>L*tiles.x+0 && i<L*tiles.x+10) this._addObstacle("brick", i, 5);
+        }
         // London-3
+        L = 2;
+        for (let i = 0+L*tiles.x; i < tiles.x*1+L*tiles.x; i++) {
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 14);
+            if (i>L*tiles.x+20 && i<L*tiles.x+30) this._addObstacle("brick", i, 11);
+            if (i>L*tiles.x+10 && i<L*tiles.x+20) this._addObstacle("brick", i, 8);
+            if (i>L*tiles.x+0 && i<L*tiles.x+10) this._addObstacle("brick", i, 5);
+        }
         // Sewers-1
+        let S = 0;
+        for (let i = 0+S*tiles.x; i < tiles.x*1+S*tiles.x; i++) {
+            if (i>S*tiles.x-1 && i<S*tiles.x+4) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+5 && i<S*tiles.x+13) this._addObstacle("pavement", i, 12+tiles.y);
+            if (i>S*tiles.x+14 && i<S*tiles.x+18) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+18 && i<S*tiles.x+21) this._addObstacle("pavement", i, 11+tiles.y);
+            if (i>S*tiles.x+23 && i<S*tiles.x+25) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+26 && i<S*tiles.x+30) this._addObstacle("pavement", i, 10+tiles.y);
+        }
+        for (let i = tiles.y+7; i < tiles.y+11; i++) {
+            this._addObstacle("greyWall", tiles.x*S+30, i);
+        }
         // Sewers-2
+        S = 1;
+        for (let i = 0+S*tiles.x; i < tiles.x*1+S*tiles.x; i++) {
+            if (i>S*tiles.x-1 && i<S*tiles.x+4) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+5 && i<S*tiles.x+13) this._addObstacle("pavement", i, 12+tiles.y);
+            if (i>S*tiles.x+14 && i<S*tiles.x+18) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+18 && i<S*tiles.x+21) this._addObstacle("pavement", i, 11+tiles.y);
+            if (i>S*tiles.x+23 && i<S*tiles.x+25) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+26 && i<S*tiles.x+30) this._addObstacle("pavement", i, 10+tiles.y);
+        }
+        for (let i = tiles.y+7; i < tiles.y+11; i++) {
+            this._addObstacle("greyWall", tiles.x*S+30, i);
+        }
         // Sewers-3
+        S = 2;
+        for (let i = 0+S*tiles.x; i < tiles.x*1+S*tiles.x; i++) {
+            if (i>S*tiles.x-1 && i<S*tiles.x+4) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+5 && i<S*tiles.x+13) this._addObstacle("pavement", i, 12+tiles.y);
+            if (i>S*tiles.x+14 && i<S*tiles.x+18) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+18 && i<S*tiles.x+21) this._addObstacle("pavement", i, 11+tiles.y);
+            if (i>S*tiles.x+23 && i<S*tiles.x+25) this._addObstacle("pavement", i, 9+tiles.y);
+            if (i>S*tiles.x+26 && i<S*tiles.x+30) this._addObstacle("pavement", i, 10+tiles.y);
+        }
+        for (let i = tiles.y+7; i < tiles.y+11; i++) {
+            this._addObstacle("greyWall", tiles.x*S+30, i);
+        }
     }
 
 
@@ -155,7 +209,7 @@ class GameScene extends Phaser.Scene {
         this._loadBG("sewers_1", 0, tiles.y);
         this._loadBG("sewers_1", tiles.x*2, tiles.y);
         this.player = this.physics.add.image(this.checkpoint.x, this.checkpoint.y, "playerR").setOrigin(0, 0);
-        this.player.setDisplaySize(tiles.size*1.1, tiles.size*1.6);
+        this.player.setDisplaySize(tiles.size, tiles.size*1.55);
         
         this.player.body.onOverlap = true;
         this.physics.add.overlap(this.player, this.ladder);
