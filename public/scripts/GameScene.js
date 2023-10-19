@@ -1,4 +1,4 @@
-import { playerVelocity, tiles, screenSize, gravityPower } from './const.js';
+import { playerVelocity, tiles, screenSize, gravityPower, distancesForBulletTravel } from './const.js';
 
 class GameScene extends Phaser.Scene {
     constructor () {
@@ -132,16 +132,33 @@ class GameScene extends Phaser.Scene {
       const shoot = () =>{
         let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
         bullet.body.allowGravity = false;
-        bullet.setVelocity(250 * this.playerFacing, 0);
+        bullet.setVelocity(1000 * this.playerFacing, 0);
 
-        this.physics.add.collider(bullet, this.brick);
-        // this.bullets.push(bullet);
+        //destroys bullet after it travels set distance
+        let hitBorder = this.physics.add.image(
+          this.player.x + tiles.size * this.playerFacing * distancesForBulletTravel.playerBullet,
+          this.player.y
+          ).setOrigin(0,0);
+        hitBorder.body.allowGravity = false;
+        hitBorder.visible = false;
+
+        this.physics.add.collider(bullet, hitBorder, ()=>{
+          hitBorder.destroy();
+          bullet.destroy();
+        });
+
+        //destroys bullet if it hits a wall
+        this.physics.add.collider(bullet, this.objectsThatCollideBullets, ()=>{
+          hitBorder.destroy();
+          bullet.destroy();
+        });
+        
       }
       this.input.keyboard.on('keyup-SPACE', shoot);
-      this.input.keyboard.on('keyup-LEFT', () => {
+      this.input.keyboard.on('keydown-LEFT', () => {
         this.playerFacing = -1;
       });
-      this.input.keyboard.on('keyup-RIGHT', () => {
+      this.input.keyboard.on('keydown-RIGHT', () => {
         this.playerFacing = 1;
       });
       //------------------shooting
@@ -162,8 +179,8 @@ class GameScene extends Phaser.Scene {
         this.player.setVelocityX(0);
       }
 
-      if (space.isDown) this.onLadder = true;
-      else this.onLadder = false;
+      // if (space.isDown) this.onLadder = true;
+      // else this.onLadder = false;
   
       if (up.isDown) {
         if (this.onLadder) {
