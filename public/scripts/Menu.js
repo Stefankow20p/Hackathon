@@ -144,7 +144,6 @@ class Menu extends Phaser.Scene{
             this.add.image(0,0,"bg").setSize(screenSize.width, screenSize.height).setOrigin(0).setDepth(-1).setScale(2)
             this.timedEvent = this.time.delayedCall(1000, ()=>{
                 this.theme = this.sound.add('menuTheme');
-                // this.theme.on('loop', this.theme.play);
                 this.theme.loop = (true);
                 this.theme.play();
             }, [], this);
