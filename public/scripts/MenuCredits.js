@@ -30,19 +30,19 @@ class Menu extends Phaser.Scene{
             this.backButton.setTexture("arrowButtonHover");
         })
 
-        this.add.text(screenMiddle, 20, "CREDITS", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 64}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 20, "CREDITS", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
 
-        this.add.text(screenMiddle, 100, "CODE:", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 32}).setOrigin(0.5,0)
-        this.add.text(screenMiddle, 140, "Stefan, Michał, Marek", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 24}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 100, "CODE:", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 140, "Stefan, Michał, Marek", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 24}).setOrigin(0.5,0)
 
-        this.add.text(screenMiddle, 250, "GRAPHICS:", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 32}).setOrigin(0.5,0)
-        this.add.text(screenMiddle, 290, "Błażej", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 24}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 250, "GRAPHICS:", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 290, "Błażej", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 24}).setOrigin(0.5,0)
 
         
-        this.add.text(screenMiddle, 400, "AUDIO:", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 32}).setOrigin(0.5,0)
-        this.add.text(screenMiddle, 440, "Michał, Marek", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 24}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 400, "AUDIO:", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, 440, "Michał, Marek", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 24}).setOrigin(0.5,0)
 
-        this.add.text(screenMiddle, screenSize.height - 25, "Copyright", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 20}).setOrigin(0.5,0)
+        this.add.text(screenMiddle, screenSize.height - 25, "Copyright", {align: "left", color:"#f08000", fontFamily: "arcade", fontSize: 20}).setOrigin(0.5,0)
 
     }
 

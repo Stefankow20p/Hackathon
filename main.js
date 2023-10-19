@@ -5,7 +5,7 @@ import { screenSize, gravityPower } from './public/scripts/const';
 import Menu from './public/scripts/Menu';
 import MenuCredits from './public/scripts/MenuCredits';
 import MenuOptions from './public/scripts/MenuOptions';
-import MenuStageSelect from './public/scripts/MenuStageSelect';
+import ShootingTest from './public/scripts/shootingTest';
 
 
 const config = {
@@ -21,6 +21,17 @@ const config = {
             debug: true
         }
     },
-    scene: [Menu, MenuCredits, MenuOptions, MenuStageSelect] 
+    scene: [Menu, MenuCredits, MenuOptions, ShootingTest] 
 };
+
+function loadFont(name, url) {
+    var newFont = new FontFace(name, `url(${url})`);
+    newFont.load().then(function (loaded) {
+        document.fonts.add(loaded);
+    }).catch(function (error) {
+        return error;
+    });
+}
+
+
 const game = new Phaser.Game(config);
