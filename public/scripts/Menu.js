@@ -40,7 +40,7 @@ class Menu extends Phaser.Scene{
             this.buttonLevels.setTexture("levelsButton");
         }).on("pointerover", ()=> {
             this.buttonLevels.setTexture("levelsButtonHover");
-            this.sound.add('buttonHover').play();
+            this.sound.add('scene-game').play();
         })
 
         this.buttonOptions = this.add.image(screenMiddle , (screenSize.height/2 + buttonShiftY) , "optionsButton").setScale(3).setInteractive();
