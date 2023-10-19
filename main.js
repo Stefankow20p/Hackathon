@@ -5,7 +5,6 @@ import { screenSize, gravityPower } from './public/scripts/const';
 import Menu from './public/scripts/Menu';
 import MenuCredits from './public/scripts/MenuCredits';
 import MenuOptions from './public/scripts/MenuOptions';
-import MenuStageSelect from './public/scripts/MenuStageSelect';
 import GameScene from './public/scripts/GameScene.js';
 
 const config = {
@@ -23,4 +22,5 @@ const config = {
     },
     scene: [Menu, MenuCredits, MenuOptions, GameScene]  
 };
+
 const game = new Phaser.Game(config);

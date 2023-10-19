@@ -1,7 +1,13 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-  
+@font-face {
+    font-family: arcade;
+    src: url('./joystix_monospace.otf');
+    font-weight: 300;
+    font-weight: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
