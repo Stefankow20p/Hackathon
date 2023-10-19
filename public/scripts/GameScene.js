@@ -303,7 +303,7 @@ class GameScene extends Phaser.Scene {
                 mob.x + (tiles.size) * mobColider2Exists.x,
                 mob.y + (tiles.size) * mobColider2Exists.y
             ).setOrigin(0,0);
-            mobColider1.setDisplaySize(tiles.size, tiles.size);
+            mobColider2.setDisplaySize(tiles.size, tiles.size);
             mobColider2.body.allowGravity = false;
             mobColider2.visible = false;
             mobColider2.setImmovable(true);
