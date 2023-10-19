@@ -94,7 +94,7 @@ class GameScene extends Phaser.Scene {
       
     //     // this.physics.add.overlap(this.player, this.ladder);    
     //     // this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
-    //     //     if (gameObject1 == this.player && gameObject2 == this.ladder) {
+        //     if (gameObject1 == this.player && gameObject2 == this.ladder) {
     //     //         this.onLadder = true;
     //     //         console.log("LADDER")
     //     //     } else this.onLadder = false;

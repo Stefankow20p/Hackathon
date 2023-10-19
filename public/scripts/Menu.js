@@ -73,11 +73,13 @@ class Menu extends Phaser.Scene{
             this.buttonLevels.setAlpha(0);
             this.buttonOptions.setAlpha(0);
             this.buttonCredits.setAlpha(0);
+            this.infoText = this.add.text(screenMiddle, screenSize.height/2, "Click anywhere\nto continue", {align: "center", color:"#f08000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
         }
 
         this.input.on("pointerdown", () =>{
             if(this.firstOpen){
                 this.sound.add('intro').play();
+                this.infoText.visible = false;
                 this.timedEvent = this.time.delayedCall(100, this.fadeIn, [], this);
                 this.firstOpen = false;
             }
