@@ -46,7 +46,7 @@ class GameScene extends Phaser.Scene {
     _displayText(text){
         this.reading = true;
 
-        this.dialogueText = this.add.text(screenSize.width/2, screenSize.height*2/5-20, text, {align: "center", color:"#000", fontFamily: "arcade", fontSize: 32, fixedWidth:600, maxLines: 5, wordWrap: { width: 600, useAdvancedWrap: true }}).setOrigin(0.5,0).setDepth(3);
+        this.dialogueText = this.add.text(screenSize.width/2, screenSize.height*2/5-20, text, {align: "center", color:"#000", fontFamily: "arcade", fontSize: 26, maxLines: 5, wordWrap: { width: 700, useAdvancedWrap: true }}).setOrigin(0.5,0).setDepth(3);
         this.dialgueBox = this.add.image(screenSize.width/2, screenSize.height/2, "dialogue").setOrigin(0.5,0.5).setScale(3).setDepth(2);
         this.dialgueBox.visible = true;
         this.dialogueText.visible = true;
@@ -164,7 +164,7 @@ class GameScene extends Phaser.Scene {
         //     child.setDisplaySize(tiles.size, tiles.size).setOrigin(0, 0)
         // });
 
-        this._displayText("Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666");
+        this._displayText("Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666 \n Press space to exit");
     
         this._loadBG("london_2", 0, -1);
         this._loadBG("london_2", tiles.x, -1);
