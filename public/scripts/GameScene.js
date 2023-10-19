@@ -198,7 +198,7 @@ class GameScene extends Phaser.Scene {
         //------------------shooting
         const shoot = () => {
             this.sound.add('shoot').play();
-            let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
+            let bullet = this.physics.add.image(this.player.x, this.player.y+tiles.size/2,"bullet").setOrigin(0,0);
             bullet.body.allowGravity = false;
             bullet.setVelocity(playerBulletSpeed * this.playerFacing, 0);
 
@@ -245,6 +245,7 @@ class GameScene extends Phaser.Scene {
             mobGravity = true
             ) => {
           const mob = this.physics.add.image(startX * tiles.size, startY * tiles.size, mobTextureR).setOrigin(0,0);
+          mob.setDisplaySize(tiles.size, tiles.size);
           mob.setVelocity(mobVelocityX * currentlyFacing, mobVelocityY * currentlyFacing);
             mob.body.allowGravity = mobGravity
           this.physics.add.collider(mob, this.obstacles);
