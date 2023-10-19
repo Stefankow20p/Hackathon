@@ -1,4 +1,4 @@
-import { playerVelocity, tiles, screenSize, gravityPower } from './const.js';
+import { playerVelocity, tiles, screenSize, gravityPower, distancesForBulletTravel } from './const.js';
 
 class GameScene extends Phaser.Scene {
     constructor () {
@@ -125,23 +125,42 @@ class GameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, screenSize.width*3, screenSize.height);
         // this.cameras.main.scrollY = 100;
 
-        //------------------shooting
-        const shoot = () =>{
-            let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
-            bullet.body.allowGravity = false;
-            bullet.setVelocity(250 * this.playerFacing, 0);
 
-            this.physics.add.collider(bullet, this.brick);
-            // this.bullets.push(bullet);
-        }
-        this.input.keyboard.on('keydown-C', shoot);
-        this.input.keyboard.on('keydown-LEFT', () => {
-            this.playerFacing = -1;
+      //------------------shooting
+      const shoot = () =>{
+        let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
+        bullet.body.allowGravity = false;
+        bullet.setVelocity(1000 * this.playerFacing, 0);
+
+        //destroys bullet after it travels set distance
+        let hitBorder = this.physics.add.image(
+          this.player.x + tiles.size * this.playerFacing * distancesForBulletTravel.playerBullet,
+          this.player.y
+          ).setOrigin(0,0);
+        hitBorder.body.allowGravity = false;
+        hitBorder.visible = false;
+
+        this.physics.add.collider(bullet, hitBorder, ()=>{
+          hitBorder.destroy();
+          bullet.destroy();
         });
-        this.input.keyboard.on('keydown-RIGHT', () => {
-            this.playerFacing = 1;
+
+        //destroys bullet if it hits a wall
+        this.physics.add.collider(bullet, this.objectsThatCollideBullets, ()=>{
+          hitBorder.destroy();
+          bullet.destroy();
         });
-        //------------------shooting
+        
+      }
+      this.input.keyboard.on('keyup-C', shoot);
+      this.input.keyboard.on('keydown-LEFT', () => {
+        this.playerFacing = -1;
+      });
+      this.input.keyboard.on('keydown-RIGHT', () => {
+        this.playerFacing = 1;
+      });
+      //------------------shooting
+
     }
   
     update () {
@@ -163,6 +182,7 @@ class GameScene extends Phaser.Scene {
     else this.onLadder = false;
 
     if (up.isDown) {
+
         if (this.onLadder) {
             this.player.setVelocityY(-this.playerSpeed)/6;
         } else if (this.player.body.touching.down) {
