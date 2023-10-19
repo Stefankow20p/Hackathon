@@ -24,8 +24,8 @@ class GameScene extends Phaser.Scene {
         // this.load.image("greyWall", "/assets/bloczekB.png");
         this.load.image("brickDefault", "/assets/bloczekA.png");
         this.load.image("pavement", "/assets/podloga.png");
-        this.load.image("playerR", "/assets/playerR.png");
-        this.load.image("playerL", "/assets/playerL.png");
+        this.load.image("playerR", "/assets/protagR.png");
+        this.load.image("playerL", "/assets/protagL.png");
         this.load.image("greyWall", "/assets/sciana.png");
         this.load.image("bullet","/assets/bullet.png");
         this.load.image("sewers_2", "/assets/sewersBG.png");
@@ -174,6 +174,7 @@ class GameScene extends Phaser.Scene {
         this._loadBG("sewers_1", 0, tiles.y);
         this._loadBG("sewers_1", tiles.x*2, tiles.y);
         this.player = this.physics.add.image(this.checkpoint.x, this.checkpoint.y, "playerR").setOrigin(0, 0);
+        this.player.setDisplaySize(tiles.size*1.1, tiles.size*1.6);
         
         this.player.body.onOverlap = true;
         this.physics.add.overlap(this.player, this.ladder);
