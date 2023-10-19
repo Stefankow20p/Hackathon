@@ -81,13 +81,42 @@ class GameScene extends Phaser.Scene {
         this._addObject("brickWall", tiles.x*2-1, i);
       }
     }
-    // _addLadder()
+    _addLadder() {
+      this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
+      this.ladder.setImmovable(true);
+      this.ladder.body.allowGravity = false;
+      this.ladder.setDisplaySize(tiles.size, tiles.size);
+      
+        // this.physics.add.overlap(this.player, this.ladder);    
+        // this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
+        //     if (gameObject1 == this.player && gameObject2 == this.ladder) {
+        //         this.onLadder = true;
+        //         console.log("LADDER")
+        //     } else this.onLadder = false;
+        // });
+    }
   
     create () {
       // this.player.setCollideWorldBounds(true);
-      this.ladder = this.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
+    //   this.ladder = this.physics.add.image(tiles.size*20, tiles.size*12, "brickWall").setOrigin(0, 0);
+    //   this.ladder.setImmovable(true);
+    //   this.ladder.body.allowGravity = false;
+    //   this.ladder.setDisplaySize(tiles.size, tiles.size);
+    this._addLadder();
   
       this.player = this.physics.add.image(tiles.size, tiles.size*(tiles.y/2), "playerR").setOrigin(0, 0);
+
+    //   --
+    this.player.body.onOverlap = true;
+    this.physics.add.overlap(this.player, this.ladder);    
+    this.physics.world.on('overlap', (gameObject1, gameObject2, body1, body2) => {
+        if (gameObject1 == this.player && gameObject2 == this.ladder) {
+            this.onLadder = true;
+            console.log("LADDER")
+        } else this.onLadder = false;
+    });
+    // --
+
       this._genLevel();
       this.cursor = this.input.keyboard.createCursorKeys();
       this.cameras.main.startFollow(this.player, false, 0.2, 0.2);
@@ -102,10 +131,10 @@ class GameScene extends Phaser.Scene {
   
       if (left.isDown) {
         this.player.setVelocityX(-this.playerSpeed);
-        this.player.setTexture("playerL", 1);
+        this.player.setTexture("playerL");
       } else if (right.isDown) {
         this.player.setVelocityX(this.playerSpeed);
-        this.player.setTexture("playerR", 1);
+        this.player.setTexture("playerR");
       } else {
         this.player.setVelocityX(0);
       }

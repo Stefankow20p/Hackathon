@@ -15,7 +15,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: gravityPower },
-            debugger: true
+            debug: true
         }
     },
     scene: [GameScene] 
