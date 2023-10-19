@@ -321,6 +321,7 @@ class GameScene extends Phaser.Scene {
           this.physics.add.collider(mob, this.player, () => {
             this.player.body.x = this.checkpoint.x;
             this.player.body.y = this.checkpoint.y;
+            
           });
 
           this.mobs.push(mob);
@@ -439,6 +440,91 @@ class GameScene extends Phaser.Scene {
 
         //--------------mobs on the surface
 
+        createMob(
+            5, 4, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            15, 7, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            15, 13, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            25, 10, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            35, 4, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:false, x:4,y:0}
+        );
+        createMob(
+            47, 7, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            47, 13, "ratR", "ratL", -150, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            57, 10, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            69, 4, "ratR", "ratL", -200, 0,
+            {exists:true, x:-4,y:0},
+            {exists:false, x:4,y:0}
+        );
+        createMob(
+            79, 7, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            79, 13, "ratR", "ratL", 100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            89, 10, "ratR", "ratL", -100, 0,
+            {exists:true, x:-4,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            89, 16, "ratR", "ratL", -100, 0,
+            {exists:true, x:-10,y:0},
+            {exists:true, x:4,y:0}
+        );
+        createMob(
+            70, 16, "ratR", "ratL", 100, 0,
+            {exists:true, x:-10,y:0},
+            {exists:true, x:10,y:0}
+        );
+        createMob(
+            20, 16, "ratR", "ratL", -100, 0,
+            {exists:true, x:-1,y:0},
+            {exists:true, x:6,y:0}
+        );
+        createMob(
+            26, 16, "ratR", "ratL", 100, 0,
+            {exists:true, x:-5,y:0},
+            {exists:true, x:5,y:0}
+        );
+        createMob(
+            20, 16, "ratR", "ratL", 500, 0,
+            {exists:true, x:-2,y:0},
+            {exists:true, x:2,y:0}
+        );
 
         
         //--------------mobs on the surface
