@@ -74,68 +74,29 @@ class GameScene extends Phaser.Scene {
         const bg = this.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
         bg.setDisplaySize(tiles.size*tiles.x, tiles.size*tiles.y);
     }
-    // ========================================== MICHAŁ ============================
+    
     _loadMap () {
-        // 1st *******************************
-        for (let i = 0; i < tiles.x; i++) {
-            this._addObstacle("greyWall", i, 0);
-            this._addObstacle("greyWall", i, 17);
-            // random
-            if (i < 10) this._addObstacle("greyWall", i, 14);
-            if (i > 15) this._addObstacle("greyWall", i, 14);
+        // FLOORS & CEILINGS
+        for (let i = 0; i < tiles.x*3; i++) {    
+            this._addObstacle("void", i, -1); // london ceiling
+            this._addObstacle("pavement", i, tiles.y*2-1); // sewers floor
+            if (i >= tiles.x+13 && i <= tiles.x+15) continue;
+            this._addObstacle("pavement", i, tiles.y-1); // london floor
+            this._addObstacle("void", i, tiles.y); // sewers ceiling
         }
-        for (let i = 0; i < tiles.y; i++) {
-            this._addObstacle("greyWall", 0, i);
-        }
-        // stairs
-        for (let i = 5; i < 15; i++) {
-            this._addObstacle("greyWall", i, 16-i);
-        }
-    
-        // 2nd *******************************
-        const level2 = {x: 1, y: 0};
-        for (let i = tiles.x*level2.x; i < tiles.x*2; i++) {
-            // ceiling & floor
-            this._addObstacle("brickDefault", i, 0);
-            if (i < tiles.x*level2.x+13 || i > tiles.x*level2.x+15) {
-                this._addObstacle("brickDefault", i, tiles.y-1); // floor
-            }
-        }
-    
-        // 3rd *******************************
-        const level3 = {x: 2, y: 0};
-        for (let i = tiles.x*level3.x; i < tiles.x+tiles.x*level3.x; i++) {
-            this._addObstacle("pavement", i, 0);
-            this._addObstacle("pavement", i, 17);
-        }
-        for (let i = 0; i < tiles.y; i++) {
-            this._addObstacle("pavement", tiles.x*3-1, i);
-        }
-    
-        // 4th (SEWERS) *******************************
-        for (let i = tiles.y+7; i < tiles.y*2-3; i++) {
-            this._addObstacle("brick", 0, i);
-            this._addObstacle("brick", 0, i);
-            this._addObstacle("brick", tiles.x*3-1, i);
-        }
-        for (let i = 0; i < tiles.x*3; i++) {
-            this._addObstacle("pavement", i, tiles.y*2 - 3);
-            this._addObstacle("greyWall", i, tiles.y*2 - 2);
-            this._addObstacle("greyWall", i, tiles.y*2 - 1);
-
-            if (i < tiles.x*level2.x+13 || i > tiles.x*level2.x+15) {
-                this._addObstacle("brickDefault", i, tiles.y-1); // floor
-                this._addObstacle("void", i, tiles.y+6);
-            }
-        }
-        for (let i = 0; i < 6; i++) {
-            this._addObstacle("void", tiles.x+12, tiles.y+i);
-            this._addObstacle("void", tiles.x+16, tiles.y+i);
+        // WALLS
+        for (let i = 0; i < tiles.y*2; i++) {    
+            this._addObstacle("pavement", -1, i); // sewers floor
+            this._addObstacle("pavement", tiles.x*3, i);
         }
 
-        // 5th (SEWERS)
+        // London-1
+        // London-2
+        // London-3
+        // Sewers-1
+        // Sewers-2
+        // Sewers-3
     }
-    // ========================================== MICHAŁ / ============================
 
 
     // ========================================== MAREK (Laddery) ============================
@@ -297,33 +258,33 @@ class GameScene extends Phaser.Scene {
           this.mobs.push(mob);
         };
 
-        createMob(
-            18,13, "ratR", "ratL", 100, 0,
-            {exists:true, x:-2,y:0},
-            {exists:true, x:2,y:0}
-        );
-        createMob(
-            23,13, "ratR", "ratL", 100, 0,
-            {exists:true, x:-2,y:0},
-            {exists:true, x:2,y:0}
-        );
-        createMob(
-            28,13, "ratR", "ratL", 100, 0,
-            {exists:true, x:-2,y:0},
-            {exists:true, x:2,y:0}
-        );
+        // createMob(
+        //     18,13, "ratR", "ratL", 100, 0,
+        //     {exists:true, x:-2,y:0},
+        //     {exists:true, x:2,y:0}
+        // );
+        // createMob(
+        //     23,13, "ratR", "ratL", 100, 0,
+        //     {exists:true, x:-2,y:0},
+        //     {exists:true, x:2,y:0}
+        // );
+        // createMob(
+        //     28,13, "ratR", "ratL", 100, 0,
+        //     {exists:true, x:-2,y:0},
+        //     {exists:true, x:2,y:0}
+        // );
 
-        createMob(
-            50,32, "ratR", "ratL", 100, 0,
-            {exists:true, x:-8,y:0},
-            {exists:true, x:8,y:0}
-        );
+        // createMob(
+        //     50,32, "ratR", "ratL", 100, 0,
+        //     {exists:true, x:-8,y:0},
+        //     {exists:true, x:8,y:0}
+        // );
 
-        createMob(
-            40,27, "bat", "bat", 0, 100,
-            {exists:true, x:0,y:-2},
-            {exists:true, x:0,y:2}, 1, false
-        );
+        // createMob(
+        //     40,27, "bat", "bat", 0, 100,
+        //     {exists:true, x:0,y:-2},
+        //     {exists:true, x:0,y:2}, 1, false
+        // );
 
     //------------------mobs
     }
