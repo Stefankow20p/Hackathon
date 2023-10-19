@@ -23,7 +23,6 @@ class Menu extends Phaser.Scene{
         this.load.audio("buttonHover", "public/audio/menu/menuHover.mp3");
         this.load.audio("buttonClick", "public/audio/menu/menuClick.mp3");
 
-        this.load.image("ae", "/assets/podloga.png");
 
     }
 
@@ -69,10 +68,6 @@ class Menu extends Phaser.Scene{
 
         this.add.text(screenMiddle, 20, "Through the History", {align: "left", color:"#f08000", fontFamily: "Helvetica", fontSize: 64}).setOrigin(0.5,0)
 
-        this.ladder = this.add.group([
-            { key: 'ae', frame: 0, repeat: 10, setXY: { x: 32, y: 148, stepY: 32} },
-            { key: 'ae', frame: 0, repeat: 10, setXY: { x: 64, y: 148, stepY: 32} }
-        ]);
 
 
     }
