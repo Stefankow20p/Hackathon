@@ -39,7 +39,6 @@ class Menu extends Phaser.Scene{
         const buttonShiftY = 20;
         const screenMiddle =  screenSize.width / 2;
 
-        this.title = this.add.text(screenMiddle, 20, "A rubber room", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
 
         this.buttonLevels = this.add.image( screenMiddle, (screenSize.height/4 + buttonShiftY) , "levelsButton").setScale(3).setInteractive();
         this.buttonLevels.on("pointerdown", ()=> {
