@@ -2,12 +2,13 @@
 "A rubber room"
 
 ## Tematyka
-Gra o eksterminacji szkodników przyczyniających się do pogorszenia jakości życia w epoce wiktoriańskiej (absolutna ściema)
+Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666
 
 ## Kontrolki
 - Skok, lewo, prawo:    strzałki
 - Lewitacja:            shift (przytrzymać) + skok (przytrzymać)
 - Strzelanie:           C
+- Pomijanie tekstu:     spacja
 
 ## Twórcy:
 - Michał Cichocki 4P (Kod)

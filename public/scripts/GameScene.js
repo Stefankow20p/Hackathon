@@ -37,6 +37,7 @@ class GameScene extends Phaser.Scene {
         this.load.image("ratR","/assets/mouseR.png");
         this.load.image("ratL","/assets/mouseL.png");
         this.load.image("bat","/assets/bat.png");
+        this.load.image("dialogue","/assets/dialogue.png");
 
         this.load.audio("shoot", "public/audio/shooting.mp3");
 
@@ -162,6 +163,8 @@ class GameScene extends Phaser.Scene {
         //     child.body.allowGravity = false;
         //     child.setDisplaySize(tiles.size, tiles.size).setOrigin(0, 0)
         // });
+
+        this._displayText("Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666");
     
         this._loadBG("london_2", 0, -1);
         this._loadBG("london_2", tiles.x, -1);

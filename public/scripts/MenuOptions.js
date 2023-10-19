@@ -43,8 +43,7 @@ class Menu extends Phaser.Scene{
         this.add.text(screenMiddle, 260, "Jump - up arrow", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
         this.add.text(screenMiddle, 320, "Shoot - c", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
         this.add.text(screenMiddle, 380, "Fly - shift", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
-
-
+        this.add.text(screenMiddle, 440, "Skip text - space", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 32}).setOrigin(0.5,0)
     }
 
     update(){
