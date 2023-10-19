@@ -6,9 +6,12 @@ class GameScene extends Phaser.Scene {
       this.cursor;
       this.playerSpeed = playerVelocity;
       this.player;
-      this.brick;
       this.onLadder = false;
       this.ladder;
+      // determines the direction player will shoot 1 - right, -1 - left
+      this.playerFacing = 1;
+      //lsit of objects that collide with bullets used for later references
+      this.objectsThatCollideBullets = [];
     }
   
     preload () {
@@ -18,16 +21,18 @@ class GameScene extends Phaser.Scene {
       this.load.image("playerR", "/assets/playerR.png");
       this.load.image("playerL", "/assets/playerL.png");
       this.load.image("brickWall", "/assets/brick.png");
+      this.load.image("bullet","/assets/bullet.png");
     }
   
     // this.basket.setBounce(1, 1);
     // this.player.setScale(.3);
     _addObject (img, x=0, y=0) {
-      this.brick = this.physics.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
-      this.brick.setImmovable(true);
-      this.brick.body.allowGravity = false;
-      this.physics.add.collider(this.player, this.brick); // YYY aktualnie tylko player
-      this.brick.setDisplaySize(tiles.size, tiles.size);
+      let brick = this.physics.add.image(tiles.size*x, tiles.size*y, img).setOrigin(0, 0);
+      brick.setImmovable(true);
+      brick.body.allowGravity = false;
+      this.physics.add.collider(this.player, brick); // YYY aktualnie tylko player
+      brick.setDisplaySize(tiles.size, tiles.size);
+      this.objectsThatCollideBullets.push(brick);
     }
     _genLevel () {
       // 1st *******************************
@@ -93,6 +98,24 @@ class GameScene extends Phaser.Scene {
       this.cameras.main.startFollow(this.player, false, 0.2, 0.2);
       this.cameras.main.setBounds(0, 0, screenSize.width*3, screenSize.height);
       // this.cameras.main.scrollY = 100;
+
+      //------------------shooting
+      const shoot = () =>{
+        let bullet = this.physics.add.image(this.player.x, this.player.y,"bullet").setOrigin(0,0);
+        bullet.body.allowGravity = false;
+        bullet.setVelocity(250 * this.playerFacing, 0);
+
+        this.physics.add.collider(bullet, this.brick);
+        // this.bullets.push(bullet);
+      }
+      this.input.keyboard.on('keyup-SPACE', shoot);
+      this.input.keyboard.on('keyup-LEFT', () => {
+        this.playerFacing = -1;
+      });
+      this.input.keyboard.on('keyup-RIGHT', () => {
+        this.playerFacing = 1;
+      });
+      //------------------shooting
     }
   
     update () {
