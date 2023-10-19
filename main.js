@@ -8,8 +8,6 @@ import MenuOptions from './public/scripts/MenuOptions';
 import MenuStageSelect from './public/scripts/MenuStageSelect';
 
 
-console.log(screenSize);
-
 const config = {
     type: Phaser.WEBGL,
     width: screenSize.width,
@@ -20,7 +18,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: gravityPower },
-            debugger: true
+            debug: true
         }
     },
     scene: [Menu, MenuCredits, MenuOptions, MenuStageSelect] 
