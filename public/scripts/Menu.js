@@ -68,7 +68,7 @@ class Menu extends Phaser.Scene{
 
         })
 
-        this.title = this.add.text(screenMiddle, 20, "A rubber room", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
+        this.title = this.add.text(screenMiddle, 20, "London 1666", {align: "left", color:"#000", fontFamily: "arcade", fontSize: 64}).setOrigin(0.5,0)
 
         if(this.firstOpen){
             this.title.setAlpha(0);

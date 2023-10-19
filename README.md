@@ -1,5 +1,5 @@
 # Tytuł
-"A rubber room"
+"London 1666"
 
 ## Tematyka
 Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w latach 1665 - 1666
