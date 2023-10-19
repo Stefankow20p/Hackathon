@@ -14,9 +14,9 @@ class GameScene extends Phaser.Scene {
         this.onLadder = false;
         this.playerFacing = 1; // determines the direction player will shoot 1 - right, -1 - left
         this.obstacles = []; // list of objects that collide with bullets used for later references
-        //   this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
+          this.checkpoint = {x: tiles.size*2, y: tiles.size*(tiles.y/2)}; // counted in tiles
         // this.checkpoint = {x: tiles.size*50, y: tiles.size*28};
-        this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
+        // this.checkpoint = {x: tiles.size*3, y: tiles.size*3};
         this.mobs = [];
     }
   
@@ -31,10 +31,12 @@ class GameScene extends Phaser.Scene {
         this.load.image("sewers_2", "/assets/sewersBG.png");
         this.load.image("sewers_1", "/assets/sewersBG2.png");
         this.load.image("london_1", "/assets/londonBG.png");
+        this.load.image("london_2", "/assets/londonBG2.png");
         this.load.image("void", "assets/void.png");
         this.load.image("brick", "assets/brick.png");
         this.load.image("ratR","/assets/mouseR.png");
         this.load.image("ratL","/assets/mouseL.png");
+        this.load.image("bat","/assets/bat.png");
     }
   
     _addObstacle (img, x = 0, y = 0) {
@@ -140,9 +142,10 @@ class GameScene extends Phaser.Scene {
         //     child.setDisplaySize(tiles.size, tiles.size).setOrigin(0, 0)
         // });
     
-        this._loadBG("london_1", 0, 0);
-        this._loadBG("london_1", tiles.x, 0);
-        this._loadBG("london_1", tiles.x*2, 0);
+        this._loadBG("london_2", 0, -1);
+        this._loadBG("london_2", tiles.x, -1);
+        this._loadBG("london_2", tiles.x*2, -1);
+
         this._loadBG("sewers_2", tiles.x, tiles.y);
         this._loadBG("sewers_1", 0, tiles.y);
         this._loadBG("sewers_1", tiles.x*2, tiles.y);
@@ -212,11 +215,12 @@ class GameScene extends Phaser.Scene {
             mobVelocityX, mobVelocityY, 
             mobColider1Exists = {exists: true, x: -2, y:0}, 
             mobColider2Exists = {exists: true, x: 2, y:0}, 
-            currentlyFacing = 1
+            currentlyFacing = 1,
+            mobGravity = true
             ) => {
           const mob = this.physics.add.image(startX * tiles.size, startY * tiles.size, mobTextureR).setOrigin(0,0);
           mob.setVelocity(mobVelocityX * currentlyFacing, mobVelocityY * currentlyFacing);
-
+            mob.body.allowGravity = mobGravity
           this.physics.add.collider(mob, this.obstacles);
           let mobColider1;
           let mobColider2;
@@ -274,6 +278,18 @@ class GameScene extends Phaser.Scene {
             28,13, "ratR", "ratL", 100, 0,
             {exists:true, x:-2,y:0},
             {exists:true, x:2,y:0}
+        );
+
+        createMob(
+            50,32, "ratR", "ratL", 100, 0,
+            {exists:true, x:-8,y:0},
+            {exists:true, x:8,y:0}
+        );
+
+        createMob(
+            40,27, "bat", "bat", 0, 100,
+            {exists:true, x:0,y:-2},
+            {exists:true, x:0,y:2}, 1, false
         );
 
     //------------------mobs
