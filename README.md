@@ -19,6 +19,12 @@ Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w Londynie latach 1
 ## Cel gry:
 Zabicie wszystkich szczurów i nietoperzy w Londynie.
 
+## Instrukcja uruchomienia gry (wymagany jest npm, korzystaliśmy również z biblioteki phaser):
+- otwarcie gałęzi main w cmd
+- użycie tych komend:
+    npm install
+    npm run dev
+
 ## Inne informacje:
 - wszytkie grafiki zrobione są przez nas (znaczy Błażeja)
 - wszystkie efekty dźwiękowe oraz muzyka również została zrobiona przez nas (poza dźwiękiem wystrzału, który został wycięty z tego filmu: https://www.youtube.com/watch?v=KdZjNg71UpU&t=65s)
