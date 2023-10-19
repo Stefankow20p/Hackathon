@@ -3,6 +3,8 @@ import { playerVelocity, tiles, screenSize, gravityPower, distancesForBulletTrav
 // this.basket.setBounce(1, 1);
 // this.player.setScale(.3);
 
+// LOREM IPSUM
+
 class GameScene extends Phaser.Scene {
     constructor () {
         super("scene-game");
