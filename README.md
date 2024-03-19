@@ -1,9 +1,6 @@
 ## Cel konkursu
 Stworzenie gry komputerowej w 8 godzin.
 
-## Tematyka
-Czystka szczurów w trakcie Wielkiej Zarazy mającej miejsce w Londynie latach 1665 - 1666.
-
 ## Kontrolki
 - Skok, lewo, prawo:    strzałki
 - Lewitacja:            shift (przytrzymać) + skok (przytrzymać)
