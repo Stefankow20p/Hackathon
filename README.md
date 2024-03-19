@@ -18,9 +18,8 @@ Zabicie wszystkich szczurów i nietoperzy w Londynie.
 
 ## Instrukcja uruchomienia gry (wymagany jest npm, korzystaliśmy również z biblioteki phaser):
 - otwarcie gałęzi main w cmd
-- użycie tych komend:
-    npm install
-    npm run dev
+- npm install
+- npm run dev
 
 ## Inne informacje:
 - wszytkie grafiki zrobione są przez nas (znaczy Błażeja), sprite gracza wzorowany na: https://route1rodent.itch.io/16x16-rpg-character-sprite-sheet CC
